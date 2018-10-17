@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-template-deployment
+  labels:
+    app: hello-template
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-template
+  template:
+    metadata:
+      labels:
+        app: hello-template
+    spec:
+      containers:
+      - name: hello-template
+        image: cscloud414.lnu.se:5000/hello-template:1.0
+        ports:
+        - containerPort: 7000
+      imagePullSecrets:
+      - name: cscloud414cred
