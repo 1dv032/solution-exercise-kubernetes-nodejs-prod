@@ -8,4 +8,4 @@ Push images to registry
 Create a pull secret
 `kubectl create secret docker-registry cscloud389cred --docker-server=cscloud389.lnu.se:5000 --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email>`
 Apply the app deployment
-`kubectl apply -f kubernetes/app-deployment.yaml`
+`kubectl apply -f kubernetes/app-deployment.yaml -f kubernetes/app-service.yaml`
