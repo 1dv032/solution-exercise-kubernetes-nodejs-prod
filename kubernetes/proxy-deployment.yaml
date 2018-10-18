@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proxy-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: proxy
+  template:
+    metadata:
+      labels:
+        app: proxy
+    spec:
+      containers:
+      - image: nginx:1.13.6-alpine 
+        imagePullPolicy: Always
+        name: nginx
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+        volumeMounts:
+        - name: nginx-configs
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx-sites.conf
+        - name: secret-volume
+          mountPath: /etc/ssl/
+      # Load the configuration files for nginx and the SSL certificate
+      volumes:
+        - name: nginx-configs
+          configMap:
+            name: nginxconfigmap
+        - name: secret-volume
+          secret:
+            secretName: nginxsecret
