@@ -19,6 +19,5 @@ spec:
         image: cscloud389.lnu.se:5000/hello-template:1.0
         ports:
         - containerPort: 7000
-        
       imagePullSecrets:
       - name: cscloud389cred
